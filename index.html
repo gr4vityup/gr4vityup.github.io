@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Student Quiz</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --panel: #031003;
+      --text: #00ff66;
+      --dim: #00cc55;
+      --border: #00aa44;
+      --glow: rgba(0, 255, 102, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Courier New", Courier, monospace;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .terminal {
+      background: var(--panel);
+      border: 2px solid var(--border);
+      padding: 28px;
+      box-shadow: 0 0 18px var(--glow);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      text-shadow: 0 0 10px var(--glow);
+    }
+
+    .subtitle {
+      color: var(--dim);
+      margin-bottom: 24px;
+    }
+
+    .question {
+      border: 1px solid var(--border);
+      padding: 18px;
+      margin-bottom: 22px;
+      background: rgba(0, 0, 0, 0.35);
+      box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.05);
+    }
+
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+      accent-color: #00ff66;
+    }
+
+    .poem-box {
+      margin-top: 14px;
+      margin-bottom: 16px;
+      padding: 16px;
+      border: 1px dashed var(--border);
+      background: #020802;
+      color: #7dffad;
+      white-space: pre-line;
+      line-height: 1.8;
+    }
+
+    button {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--text);
+      padding: 12px 20px;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--text);
+      color: #000;
+      box-shadow: 0 0 12px var(--glow);
+    }
+
+    #result {
+      margin-top: 24px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      display: none;
+      white-space: pre-line;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    #result a {
+      color: #7dffad;
+      word-break: break-all;
+    }
+
+    .blink {
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--dim);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 12px;
+      }
+
+      .terminal {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .poem-box {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="terminal">
+      <h1>> HACKER FROM ALL SIDE <span class="blink">_</span></h1>
+      <div class="subtitle">
+        Answer all questions.
+      </div>
+
+      <form id="quizForm">
+        <div class="question">
+          <div class="question-title">
+            1. The regional capital of Surkhandarya is _____
+          </div>
+          <label><input type="radio" name="q1" value="a"> Gulistan</label>
+          <label><input type="radio" name="q1" value="b"> Termez</label>
+          <label><input type="radio" name="q1" value="c"> Karshi</label>
+          <label><input type="radio" name="q1" value="d"> Kobul</label>
+        </div>
+
+        <div class="question">
+          <div class="question-title">
+            2. ____ is neither in Surkhandarya nor Kashkadarya
+          </div>
+          <label><input type="radio" name="q2" value="a"> Baysun</label>
+          <label><input type="radio" name="q2" value="b"> Kitab</label>
+          <label><input type="radio" name="q2" value="c"> Kushrabat</label>
+          <label><input type="radio" name="q2" value="d"> Muzrabat</label>
+        </div>
+
+        <div class="question">
+          <div class="question-title">
+            3. Who is the author of this poem?
+          </div>
+
+          <div class="poem-box">
+Bozorga chiqibdi qulupnay,
+Yetkazdi, Xudodan aylanay,
+Ilinib, ilinib olvolay,
+Onamni ko‘rgani boraman.
+
+Ishlarim yo‘limni to‘ssa ham,
+Poyimda tikanlar o‘ssa ham,
+Bir dasta gul olib bo‘lsa ham,
+Onamni ko‘rgani boraman.
+
+Kirsam ham ikkita non bilan,
+Bag‘riga bosadi jon bilan,
+Aytadi: "Keldingmi, jon bolam?"
+Onamni ko‘rgani boraman.
+
+Aytmayin bolamning g‘amini,
+Bildirmay ro‘zgorim kamini,
+O‘chirmay yuragin sha’mini,
+Onamni ko‘rgani boraman.
+
+Akamning yaxshisin oshiray,
+Ukamning aybini yashiray,
+Quvnatib mehrini toshiray,
+Onamni ko‘rgani boraman.
+
+Erkalay: "Oymomam, o‘zimni,
+Quvnatib turasiz ko‘zimni",
+Kuladi eshitib so‘zimni,
+Onamni ko‘rgani boraman.
+          </div>
+
+          <label><input type="radio" name="q3" value="a"> Muhammad Yusuf</label>
+          <label><input type="radio" name="q3" value="b"> Iqbol Mirzo</label>
+          <label><input type="radio" name="q3" value="c"> Usmon Azim</label>
+          <label><input type="radio" name="q3" value="d"> Marhabo Karimova</label>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">SUBMIT ANSWERS</button>
+      </form>
+
+      <div id="result"></div>
+
+      <div class="footer-note">
+        
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const correctAnswers = {
+        q1: "b", // Termez
+        q2: "c", // Kushrabat
+        q3: "d"  // Marhabo Karimova
+      };
+
+      let score = 0;
+
+      for (const key in correctAnswers) {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === correctAnswers[key]) {
+          score++;
+        }
+      }
+
+      const result = document.getElementById("result");
+      result.style.display = "block";
+
+      if (score === 3) {
+        const zipPath = "https://diyor28e.github.io/smart_student/file.zip";
+        result.innerHTML =
+`[ACCESS GRANTED]
+
+All answers correct.
+
+Unlocked ZIP path:
+<a href="${zipPath}" target="_blank">${zipPath}</a>`;
+      } else {
+        result.innerHTML =
+`[ACCESS DENIED]
+
+Number of correct answers: ${score}/3
+
+Answer all questions to get correct file path.`;
+      }
+    }
+  </script>
+</body>
+</html>
