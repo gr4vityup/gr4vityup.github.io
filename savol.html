@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 7 - User ID Mystery</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 620px;
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 28px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    p {
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 11px;
+      border-radius: 6px;
+      border: 1px solid #4b5563;
+      background: #0f172a;
+      color: #f9fafb;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 24px;
+      width: 100%;
+      padding: 12px;
+      border: 0;
+      border-radius: 6px;
+      background: #22c55e;
+      color: #052e16;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .error {
+      background: #7f1d1d;
+      color: #fee2e2;
+    }
+
+    .success {
+      background: #064e3b;
+      color: #d1fae5;
+      font-weight: bold;
+    }
+
+    code {
+      color: #93c5fd;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Task 7: User ID Mystery</h1>
+
+    <p>
+      Prove that you inspected the <code>auditor</code> account carefully.
+      Answer all questions correctly to reveal the flag.
+    </p>
+
+    <form id="quiz">
+      <label for="uid">1. What is auditor's user ID?</label>
+      <input id="uid" autocomplete="off" />
+
+      <label for="gid">2. What is auditor's primary group ID?</label>
+      <input id="gid" autocomplete="off" />
+
+      <label for="groups">3. Which groups is auditor a member of?</label>
+      <input id="groups" placeholder="Example: group1, group2, group3" autocomplete="off" />
+
+      <label for="home">4. What is auditor's home directory?</label>
+      <input id="home" autocomplete="off" />
+
+      <label for="shell">5. What is auditor's login shell?</label>
+      <input id="shell" autocomplete="off" />
+
+      <button type="submit">Check Answers</button>
+    </form>
+
+    <div id="error" class="message error">
+      Some answers are incorrect.
+    </div>
+
+    <div id="success" class="message success">
+      Correct. Flag: HAAD{uid_fields_tell_stories}
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("quiz");
+    const errorBox = document.getElementById("error");
+    const successBox = document.getElementById("success");
+
+    function clean(value) {
+      return value.trim().toLowerCase();
+    }
+
+    function normalizeGroups(value) {
+      return value
+        .toLowerCase()
+        .split(/[,\s]+/)
+        .map(item => item.trim())
+        .filter(Boolean)
+        .sort()
+        .join(",");
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const uid = clean(document.getElementById("uid").value);
+      const gid = clean(document.getElementById("gid").value);
+      const groups = normalizeGroups(document.getElementById("groups").value);
+      const home = clean(document.getElementById("home").value);
+      const shell = clean(document.getElementById("shell").value);
+
+      const correct =
+        uid === "1337" &&
+        gid === "1337" &&
+        groups === "auditor,exam,logs" &&
+        home === "/home/auditor" &&
+        shell === "/bin/bash";
+
+      errorBox.style.display = correct ? "none" : "block";
+      successBox.style.display = correct ? "block" : "none";
+    });
+  </script>
+</body>
+</html>
